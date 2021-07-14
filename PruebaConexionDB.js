@@ -8,6 +8,12 @@ const connection = mysql.createConnection({
 	port: 3306,
 });
 
+// hacemos la query y luego el callback para gestionar error o resultado //
 connection.connect((err) => {
-	console.log(err);
+	connection.query('select * from products', (err, result) => {
+		if (err) {
+			return console.log(err.message);
+		}
+		console.log(result);
+	});
 });
