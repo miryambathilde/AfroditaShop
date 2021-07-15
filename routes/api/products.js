@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // DONE: extraer solo las funciones que vamos a usar
-const { getAll, getById, create } = require('../../models/product.model');
+const { getAll, getById, create, getByCategory } = require('../../models/product.model');
 
 router.get('/', (req, res) => {
 	// 1 - Recuperar los productos de la BBDD, como nos devuelve una promesa el metodo de la query, tenemos que poner el then y el catch
@@ -31,6 +31,7 @@ router.get('/v2', async (req, res) => {
 });
 
 
+
 //como nos devuelve una promesa, tenemos que hacerlo con ASYNC AWAIT TRY CATCH
 
 router.get('/:productId', async (req, res) => {
@@ -45,6 +46,14 @@ router.get('/:productId', async (req, res) => {
 		res.json({ error: err.message });
 	}
 });
+
+// RECUPERAR PRODUCTOS POR CATEGORIA getByCategory GET localhost:3000/api/products/cat/oficina
+router.get('/cat/:category', async (req, res) => {
+	getByCategory(req.params.category)
+		.then(result => res.json(result))
+		.catch(error => res.json({ error: error.message }));
+});
+
 
 // con opcion THEN CATCH, sin async ni await ni try catch, pero es lo mismo de antes
 router.get('/:productId/v2', (req, res) => {

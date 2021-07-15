@@ -6,6 +6,10 @@ http://localhost:3000/api/products/v2
 
 ###
 
+GET localhost:3000/api/products/cat/oficina
+
+###
+
 GET http://localhost:3000/api/products/2
 
 ###

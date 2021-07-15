@@ -32,9 +32,27 @@ const getById = (productId) => {
 	});
 };
 
+
+// RECUPERAR PRODUCTOS POR CATEGORIA getByCategory GET localhost:3000/api/products/cat/oficina
+// el ? es para parametros dinámicos y siempre despues de la ? tiene que ir un array con tantos valores como interrogaciones tenga la sentencia de la query
+// y después del array siempre va una función anómima con el error y el resultado, el resultado siempre será un array
+const getByCategory = (category) => {
+	return new Promise((resolve, reject) => {
+		db.query(
+			'select * from products where category = ?',
+			[category],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+};
+
+
 // insertar nuevo registro en la BBDD //
 // insert into productos (name, description, price, category, available, created_at) value (...)
-// el ? es para parametros dinnámicos y siempre despues de la ? tiene que ir un array con tantos valores como interrogaciones tenga la sentencia de la query
+// el ? es para parametros dinámicos y siempre despues de la ? tiene que ir un array con tantos valores como interrogaciones tenga la sentencia de la query
 // y después del array siempre va una función anómima con el error y el resultado, el resultado siempre será un array
 
 const create = ({name, description, price, category}) => {
@@ -56,4 +74,5 @@ module.exports = {
 	getAll,
 	getById,
 	create,
+	getByCategory
 };
