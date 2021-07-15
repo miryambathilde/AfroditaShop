@@ -6,7 +6,19 @@ http://localhost:3000/api/products/v2
 
 ###
 
+GET http://localhost:3000/api/products/2
+
+###
+
 POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "name": "cantimplora azul",
+  "description": "cantimplora de montaña",
+  "price": 10,
+  "category": "aventura"
+}
 
 ###
 
