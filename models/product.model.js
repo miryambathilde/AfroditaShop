@@ -36,6 +36,7 @@ const getById = (productId) => {
 // RECUPERAR PRODUCTOS POR CATEGORIA getByCategory GET localhost:3000/api/products/cat/oficina
 // el ? es para parametros dinámicos y siempre despues de la ? tiene que ir un array con tantos valores como interrogaciones tenga la sentencia de la query
 // y después del array siempre va una función anómima con el error y el resultado, el resultado siempre será un array
+
 const getByCategory = (category) => {
 	return new Promise((resolve, reject) => {
 		db.query(
@@ -68,11 +69,47 @@ const create = ({name, description, price, category}) => {
 	});
 };
 
+
+// actualizar los datos de un producto
+// query: update products set name = '', description = '', price = , category = '' where id = ?
+// el ? es para parametros dinámicos y siempre despues de la ? tiene que ir un array con tantos valores como interrogaciones tenga la sentencia de la query
+// y después del array siempre va una función anómima con el error y el resultado, el resultado siempre será un array
+// el id va fuera del objeto porque es un parametro dinámico
+
+const update = (id, { name, description, price, category }) => {
+	return new Promise((resolve, reject) => {
+		db.query (
+			'update products set name = ?, description = ?, price = ?, category = ? where id = ?',
+			[name, description, price, category, id],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+}
+
+// BORRAR EL PRODUCTO POR ID - delete * from product where id = 1 //
+const remove = (id) => {
+	return new Promise((resolve, reject) => {
+		db.query(
+			'DELETE from products where id = ?',
+			[id],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+};
+
 /*  exportamos el module/modelo y tiene una clave y valor, que si tienen el mismo nombre 
 puede ponerse solo una vez */
 module.exports = {
 	getAll,
 	getById,
 	create,
-	getByCategory
+	getByCategory,
+	update,
+	remove
 };

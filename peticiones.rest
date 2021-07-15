@@ -1,3 +1,4 @@
+
 GET http://localhost:3000/api/products
 
 ###
@@ -6,11 +7,11 @@ http://localhost:3000/api/products/v2
 
 ###
 
-GET localhost:3000/api/products/cat/oficina
+GET http://localhost:3000/api/products/2
 
 ###
 
-GET http://localhost:3000/api/products/2
+GET http://localhost:3000/api/products/cat/moda
 
 ###
 
@@ -26,8 +27,18 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/products
+PUT http://localhost:3000/api/products/5
+Content-Type: application/json
+
+{
+  "name": "cantimplora azul",
+  "description": "cantimplora de montaña",
+  "price": 20,
+  "category": "aventura"
+}
 
 ###
 
-DELETE http://localhost:3000/api/products
+DELETE http://localhost:3000/api/products/5
+
+###
