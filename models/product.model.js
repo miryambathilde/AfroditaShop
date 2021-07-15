@@ -17,9 +17,3 @@ puede ponerse solo una vez */
 module.exports = {
 	getAll,
 };
-
-// aqui esta la clave y valor puestos pero ser el mismo nombre lo que hacemos es ponerlo una vez
-
-/* module.exports = {
-	getAll: getAll,
-}; */
