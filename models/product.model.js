@@ -103,6 +103,22 @@ const remove = (id) => {
 	});
 };
 
+// RECUPERAR LOS PRODUCTOS COMPRADOS POR CLIENTES //
+// en la query el id del cliente será un parametro dinámico 
+
+const getByClient = (clientId) => {
+	return new Promise((resolve, reject) => {
+		db.query(
+			'select p.* from products p, tbi_clients_products tbi where p.id = tbi.product_id and tbi.client_id = ?',
+			[clientId],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+}
+
 /*  exportamos el module/modelo y tiene una clave y valor, que si tienen el mismo nombre 
 puede ponerse solo una vez */
 module.exports = {
@@ -111,5 +127,6 @@ module.exports = {
 	create,
 	getByCategory,
 	update,
-	remove
+	remove,
+	getByClient,
 };
