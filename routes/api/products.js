@@ -4,6 +4,7 @@ const router = express.Router();
 // DONE: extraer solo las funciones que vamos a usar
 const { getAll, getById, create, getByCategory, update, remove } = require('../../models/product.model');
 
+// TODO paginado de productos
 router.get('/', (req, res) => {
 	// 1 - Recuperar los productos de la BBDD, como nos devuelve una promesa el metodo de la query, tenemos que poner el then y el catch
 	getAll()

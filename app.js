@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // QUERIES API //
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// delegación a la API //
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
