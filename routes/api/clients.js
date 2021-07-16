@@ -22,9 +22,7 @@ router.get('/', async (req, res) => {
       // creamos una nueva propiedad products dentro de client
       client.products = products;
     }
-    
-
-    res.json(clients);
+        res.json(clients);
   } catch (error) {
     res.json({ error: error.message });
   }
