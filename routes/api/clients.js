@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAll, create } = require('../../models/client.model');
+const { getAll, create, getByUserId } = require('../../models/client.model');
 const { getByClient } = require('../../models/product.model');
 
 // GET http://localhost:3000/api/clients
@@ -41,6 +41,21 @@ router.post('/', async (req, res) => {
 
 // DELETE
 
-// TODO: clientes del usuario logado //
+// recuperar clientes del usuario logado Y QUE SEA admin A//
+// añadimos a clients el campo user_id
+// asignamos a los clientes un usuario a cada uno
+
+// GET http://localhost:3000/api/clients/user
+router.get('/user', async (req, res) => {
+	try {
+		// comprobamos que funciona:
+		// res.json(req.user);
+
+		const clients = await getByUserId(req.user.id);
+		res.json(clients);
+	} catch (error) {
+		res.json({ error: error.message });
+	}
+});
 
 module.exports = router;
