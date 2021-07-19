@@ -14,7 +14,14 @@ const getByEmail = (email) => {
 	return executeQueryUnique('select * from users where email = ?', [email]);
 };
 
+//metodo para conseguir para filtrar usuarios por id
+const getById = (userId) => {
+	return executeQueryUnique('select * from users where id = ?', [userId]);
+	console.log(getById);
+};
+
 module.exports = {
 	create,
 	getByEmail,
+	getById,
 };

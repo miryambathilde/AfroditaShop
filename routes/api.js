@@ -5,10 +5,12 @@ const router = express.Router();
 const apiProductsRouter = require('./api/products');
 const apiClientsRouter = require('./api/clients');
 const apiUsersRouter = require('./api/users');
+const { checkToken, checkAdmin, checkRole } = require('./middlewares');
 
 // delegamos las queries al router de api/products.js //
-router.use('/products', apiProductsRouter);
-router.use('/clients', apiClientsRouter);
+// incluimos los middleware //
+router.use('/products', checkToken, checkRole('R'), apiProductsRouter);
+router.use('/clients', checkToken, checkAdmin, apiClientsRouter);
 router.use('/users', apiUsersRouter);
 
 module.exports = router;

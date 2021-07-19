@@ -3,7 +3,6 @@ const router = express.Router();
 const { getAll, create } = require('../../models/client.model');
 const { getByClient } = require('../../models/product.model');
 
-
 // GET http://localhost:3000/api/clients
 /* como devuelve una promesa ASYNC AWAIT TRY CATCH */
 // 1. delante de la funcion que devuelve la promesa le ponemos el await
@@ -14,36 +13,34 @@ const { getByClient } = require('../../models/product.model');
 
 // RECUPERAMOS LOS CLIENTES Y LOS PRODUCTOS QUE HAN COMPRADO, YA HEMOS HECHO LA RELACION
 router.get('/', async (req, res) => {
-  try {
-    const clients = await getAll();
+	try {
+		const clients = await getAll();
 
-    for (let client of clients) {
-      const products = await getByClient(client.id);
-      // creamos una nueva propiedad products dentro de client
-      client.products = products;
-    }
-        res.json(clients);
-  } catch (error) {
-    res.json({ error: error.message });
-  }
+		for (let client of clients) {
+			const products = await getByClient(client.id);
+			// creamos una nueva propiedad products dentro de client
+			client.products = products;
+		}
+		res.json(clients);
+	} catch (error) {
+		res.json({ error: error.message });
+	}
 });
-
 
 // POST http://localhost:3000/api/clients
 router.post('/', async (req, res) => {
-  try {
-    const result = await create(req.body);
-    res.json(result);
-  } catch (error) {
-    res.json({ error: error.message });
-  }
+	try {
+		const result = await create(req.body);
+		res.json(result);
+	} catch (error) {
+		res.json({ error: error.message });
+	}
 });
-
 
 // PUT
 
+// DELETE
 
-// DELETE 
+// TODO: clientes del usuario logado //
 
-
-module.exports = router
+module.exports = router;

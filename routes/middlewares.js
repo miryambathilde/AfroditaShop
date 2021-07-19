@@ -41,9 +41,32 @@ const checkToken = async (req, res, next) => {
 	next();
 };
 
-// MIDDLEWARE chedkAdmin //
+// MIDDLEWARE checkAdmin //
 
 // 1. Comprobamos que el rol del usuario logado es A, si no devuelve error
 // 2. Aplicamos a todas las rutas de /clients
 
-module.exports = { checkToken };
+const checkAdmin = (req, res, next) => {
+	// primero comprobamos que funciona //
+	console.log(req.user.role);
+	if (req.user.role !== 'A') {
+		return res.json({
+			error: 'Para acceder a este recurso debes ser administrador',
+		});
+	}
+
+	next();
+};
+
+// MIDDLEWARE checkRole //
+
+const checkRole = (role) => {
+	return (req, res, next) => {
+		if (req.user.role !== role) {
+			res.json({ error: 'Tu role no tiene permiso para este recurso' });
+		}
+		next();
+	};
+};
+
+module.exports = { checkToken, checkAdmin, checkRole };
