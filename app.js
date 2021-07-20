@@ -17,9 +17,10 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api');
 
+// app de express
 const app = express();
 
-// view engine setup
+// view engine setup --view=pug
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 

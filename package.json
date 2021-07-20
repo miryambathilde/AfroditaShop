@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "constantinople": "^4.0.1",
     "cookie-parser": "~1.4.4",
     "dayjs": "^1.10.6",
     "debug": "~2.6.9",
