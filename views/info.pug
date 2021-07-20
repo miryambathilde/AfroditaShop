@@ -1,0 +1,21 @@
+extends layout.pug
+
+mixin list(arr)
+	ul
+		each val in arr
+			li= val
+		else 
+			li No hay elementos que mostrar
+
+block content
+	h3 'Encabezado para info'
+	p Esta es la página para informarse de las cosas
+	//- Ejecutamos el mixin poniendo + más el nombre del mixin
+	+list([])
+	+list([1,2,3,4,5,6])
+	//- Aqui le pasamos el objeto people creado en index.js de router.get info
+	+list(people.map(person => person.name + ' ' + person.surname))
+
+	//- Para convertir algo en texto plano ponemos delante | 
+	p 
+		| Contenido del párrafo
