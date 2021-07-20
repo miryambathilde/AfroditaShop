@@ -1,5 +1,58 @@
-extends layout
+h2 Página principal
 
-block content
-  h1= title
-  p Welcome to #{title}
+//- EJEMPLOS DE ESCRIBIR EN PUG //
+.uno 
+	a(href="http://www.google.es", class="enlace") Enlace 1
+	//- podemos poner la clase enlace con un .clase
+	a.enlace(href="http://www.yahoo.es") Yahoo.es
+	//- podemos especificar el id con #identificador seguido de la clase
+	a#enlacePrincipal.enlace(href="http://applesfera.com") Applesfera
+
+.dos 
+	p(style={'font-weight': 600})= title
+	//- para incrustar el valor de una variable se hace con #{nombreVariable}
+	p El valor del título es: #{title}
+	//- ESTILO LINEA: añadir valores (style={}) //
+	p(style={color: 'blue', 'background-color': 'lightblue'}) Párrafo con estilos
+
+
+.tres 
+	//- código javascript //
+	- const clases = ['uno', 'dos', 'tres']
+	p(class=clases) Párrafo con clases
+	p(class=clasesV2) Segundo párrafo con clases
+
+
+//- ITERADORES O BUCLES //
+//- EJEMPLO DE SWITCH CASE EN PUG
+.cuatro 
+	case products 
+		when 0
+			p No tienes productos
+		when 1
+			p Tienes 1 producto
+		default 
+			p Tienes #{products} productos
+
+// Comentario que aparece en el HTML //
+//- Comentario para el desarrollador, no aparece en el HTML 
+//-BUCLE FOR
+.cinco
+	ul
+		- for(let i = 0; i < clasesV2.length; i++)
+			li= clasesV2[i]
+
+//-OPERADOR EACH PARA ITERAR COMO UN FOREACH PROPIO DE PUG, el equivalente de for each en JS
+//- FOR EACH JS: - for (let val of clasesV2)
+.seis
+	ul
+		each val, index in clasesV2
+			//- li= (index+1) + ' ' + val es lo mismo que lo de abajo
+			li #{index+1} #{val}
+	
+	//- si el array esta vacío le ponemos el else en caso de que esté vacío
+	ol
+		each animal in animals
+			li= animal
+		else 
+			li No hay animales
