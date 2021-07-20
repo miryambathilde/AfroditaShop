@@ -1,0 +1,30 @@
+extends ../layouts/layout_products.pug
+
+block main
+	h3.title.is-3 Añade un nuevo producto
+
+
+	// ahora hacemos un formulario
+	//- en action le decimos que cuando hagamos post la respuesta se muestre en products/create
+	form(action="/products/create", method="POST")
+		.field
+			label.label Nombre
+			.control
+				input.input(type='text' placeholder='Nombre' name="name")
+		.field
+			label.label Descripción
+			.control
+				input.input(type='text' placeholder='Descripción' name="description")
+		.field
+			label.label Precio
+			.control
+				input.input(type='text' placeholder='Precio' name="price")
+		.field
+			label.label Categoría
+			.control
+				input.input(type='text' placeholder='Categoría' name="category")
+		.field
+			p.control-is-fullwidth
+				button.button.is-info.is-fullwidth
+					| Crear producto
+

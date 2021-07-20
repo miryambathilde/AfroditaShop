@@ -23,4 +23,31 @@ router.get('/info', (req, res) => {
 	});
 });
 
+/* GET localhost:3000/products
+VISTA: products/index.pug */
+router.get('/', (req, res) => {
+	res.render('products/index');
+});
+
+/* GET localhost:3000/products/new
+VISTA: products/new.pug */
+
+router.get('new', (req, res) => {
+	res.render('products/new');
+});
+
+/* GET localhost:3000/products/edit
+VISTA: products/edit.pug */
+
+router.get('edit', (req, res) => {
+	res.render('/products/edit');
+});
+
+/* GET localhost:3000/products/remove
+VISTA: products/remove.pug */
+
+router.get('remove', (req, res) => {
+	res.render('produts/remove');
+});
+
 module.exports = router;

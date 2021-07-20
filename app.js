@@ -16,6 +16,7 @@ require('./dbConfig');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api');
+const productsRouter = require('./routes/products');
 
 // app de express
 const app = express();
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // delegación a la API //
 app.use('/api', apiRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

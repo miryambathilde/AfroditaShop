@@ -1,0 +1,40 @@
+//- extends y el layout/plantilla o el path del layout que queremos aplicar
+extends ../layouts/layout_products.pug
+
+block main
+	h3.title.is-3 Listado de productos (#{products.length})
+
+
+	//- ahora lo que queremos es que se nos muestren los datos del array products en una tabla //
+	
+	table.table.is-fullwidth.is-striped
+		thead
+			tr
+				th Nombre 
+				th Descripción 
+				th Precio 
+				th Categoría
+				th Disponible
+		
+		tbody
+			each product in products
+				tr 
+					td= product.name
+					td= product.description
+					td #{product.price}€
+					td= product.category
+					td= product.available === 1 ? 'SÍ 😊' : 'NO 😔'
+
+	.products
+		each product in products
+			.card
+				header.card-header
+					p.card-header-title= product.name
+				.card-content
+					.content
+						p= product.description
+						p #{product.price} 💶
+				footer.card-footer
+					a.card-footer-item(href='#') Save
+					a.card-footer-item(href='#') Edit
+					a.card-footer-item(href='#') Delete
