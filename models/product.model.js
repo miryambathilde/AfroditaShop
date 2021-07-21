@@ -43,16 +43,7 @@ const getById = (productId) => {
 // y después del array siempre va una función anómima con el error y el resultado, el resultado siempre será un array
 
 const getByCategory = (category) => {
-	return new Promise((resolve, reject) => {
-		db.query(
-			'select * from products where category = ?',
-			[category],
-			(err, result) => {
-				if (err) return reject(err);
-				resolve(result);
-			}
-		);
-	});
+	return executeQuery('select * from products where category = ?', [category]);
 };
 
 // insertar nuevo registro en la BBDD //

@@ -1,4 +1,30 @@
 extends ../layouts/layout_products.pug
 
 block main
-	h3 Prueba de edit products
+	h3.title.is-3 Realiza los cambios sobre el producto
+
+
+	// ahora hacemos un formulario
+	//- en action le decimos que cuando hagamos post la respuesta se muestre en /products/edit/:productId
+	form(action="/products/edit/:productId", method="POST")
+		.field
+			label.label Nombre
+			.control
+				input.input(type='text' value=product.name placeholder='Nombre' name="name")
+		.field
+			label.label Descripción
+			.control
+				input.input(type='text' value=product.description placeholder='Descripción' name="description")
+		.field
+			label.label Precio
+			.control
+				input.input(type='text' value=product.price placeholder='Precio' name="price")
+		.field
+			label.label Categoría
+			.control
+				input.input(type='text' value=product.category placeholder='Categoría' name="category")
+		.field
+			p.control-is-fullwidth
+				button.button.is-info
+					| Enviar cambios
+
