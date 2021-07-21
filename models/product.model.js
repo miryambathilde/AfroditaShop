@@ -1,4 +1,4 @@
-const { executeQuery } = require('../helpers');
+const { executeQuery, executeQueryUnique } = require('../helpers');
 
 // PAGINACION DE PRODUCTOS //
 
@@ -25,17 +25,7 @@ const getAll = (page = 1, limit = 5) => {
 // o se resuelve devolviendo el producto en sí resolve(result[0]);
 
 const getById = (productId) => {
-	return new Promise((resolve, reject) => {
-		db.query(
-			'select * from products where id = ?',
-			[productId],
-			(err, result) => {
-				if (err) return reject(err);
-				if (result.length !== 1) return resolve(null);
-				resolve(result[0]);
-			}
-		);
-	});
+	return executeQueryUnique('select * from products where id = ?', [productId]);
 };
 
 // RECUPERAR PRODUCTOS POR CATEGORIA getByCategory GET localhost:3000/api/products/cat/oficina

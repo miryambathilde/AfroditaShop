@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAll, create, getById, update } = require('../models/product.model');
+const {
+	getAll,
+	create,
+	getById,
+	update,
+	remove,
+} = require('../models/product.model');
 
 router.get('/', (req, res) => {
 	// 1. Recuperar todos los productos de la BD - HECHO
@@ -47,8 +53,17 @@ router.post('/update', (req, res) => {
 	//res.send('Formulario edit funciona');
 });
 
-router.get('/remove', (req, res) => {
-	res.render('products/remove');
+/* GET localhost:3000/products/remove/productId
+1. A partir del ID del producto borramos dicho producto de la BD
+2. Redirect a /products
+3. Cuando queremos recuperar valor de la url siempre es req.params, si es del objeto, req.body
+*/
+router.get('/remove/:productId', (req, res) => {
+	console.log(req.params);
+	remove(req.params.productId)
+		.then((result) => res.redirect('/products'))
+		.catch((error) => console.log(error));
+	//res.send('Formulario remove funciona');
 });
 
 router.post('/create', (req, res) => {
@@ -56,5 +71,22 @@ router.post('/create', (req, res) => {
 		.then((result) => res.redirect('/products'))
 		.catch((error) => console.log(error));
 });
+
+/* 
+GET localhost:3000/products/productId
+
+Objetivo Final: renderizar una vista que muestre el producto seleccionado
+	1. Pensar como crear la ruta
+	2. Recuperar el producto
+Pasar el producto a la vista y renderizarlo 
+*/
+router.get('/:productId', (req, res) => {
+	getById(req.params.productId)
+		.then((product) => {
+			res.render('products/detail', { product });
+		})
+		.catch((error) => console.log(error));
+});
+//res.send('Formulario detalle producto funciona');
 
 module.exports = router;
