@@ -20,7 +20,11 @@ router.get('/', (req, res) => {
 
 	getAll(page, 5)
 		.then((products) => {
-			res.render('products/index', { products, page: parseInt(page) });
+			res.render('products/index', {
+				products,
+				page: parseInt(page),
+				message: req.flash('message'),
+			});
 		})
 		.catch((error) => console.log(error));
 });
@@ -81,7 +85,9 @@ router.get('/:productId', (req, res) => {
 // Que datos necesito? {name, description, price, category} + id
 router.post('/update', (req, res) => {
 	update(req.body.productId, req.body)
-		.then((result) => res.redirect('/products'))
+		.then((result) => {
+			res.redirect('/products');
+		})
 		.catch((error) => console.log(error));
 
 	//res.send('Formulario edit funciona');
@@ -89,7 +95,10 @@ router.post('/update', (req, res) => {
 
 router.post('/create', (req, res) => {
 	create(req.body)
-		.then((result) => res.redirect('/products'))
+		.then((result) => {
+			req.flash('message', 'Se ha creado correctamente el nuevo producto');
+			res.redirect('/products');
+		})
 		.catch((error) => console.log(error));
 });
 

@@ -2,6 +2,11 @@
 extends ../layouts/layout_products.pug
 
 block main
+	if message.length > 0
+		script.
+			Swal.fire("Success!","#{message[0]}", "success")
+
+
 	h3.title.is-3 Listado de productos (#{products.length})
 	h4.title.is-4 Pagina #{page}
 	.page-buttons.mb-4
