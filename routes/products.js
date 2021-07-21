@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 	// 2. Pasar los productos recuperados de la vista
 	// 3. Dentro de la vista iterarlos para mostrarlos
 
-	getAll(1, 10)
+	getAll(1, 20)
 		.then((products) => {
 			res.render('products/index', { products });
 		})
@@ -28,8 +28,9 @@ router.get('/remove', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-	console.log(req.body);
-	res.send('Creamos el producto');
+	create(req.body)
+		.then((result) => res.redirect('/products'))
+		.catch((error) => console.log(error));
 });
 
 module.exports = router;

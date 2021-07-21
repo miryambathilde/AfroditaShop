@@ -61,16 +61,10 @@ const getByCategory = (category) => {
 // y después del array siempre va una función anómima con el error y el resultado, el resultado siempre será un array
 
 const create = ({ name, description, price, category }) => {
-	return new Promise((resolve, reject) => {
-		db.query(
-			'insert into products (name, description, price, category, available, created_at) values(?, ?, ?, ?, ?, ?)',
-			[name, description, price, category, true, new Date()],
-			(err, result) => {
-				if (err) return reject(err);
-				resolve(result);
-			}
-		);
-	});
+	return executeQuery(
+		'insert into products (name, description, price, category, available, created_at) values(?, ?, ?, ?, ?, ?)',
+		[name, description, price, category, true, new Date()]
+	);
 };
 
 // actualizar los datos de un producto
