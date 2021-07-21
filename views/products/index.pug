@@ -64,13 +64,9 @@ block main
 		const botones = document.querySelectorAll('.borradoRapido');
 
 		for(let boton of botones) {
-			boton.addEventListener('click', function(event){
-				const productId = boton.dataset.productid;
-				fetch(`/api/products/${productId}`, {method: 'DELETE'})
-				.then(response => response.json())
-				.then(data => {
-					boton.parentElement.parentElement.remove();
-				})
-				.catch(error => console.log(error))
-			})
+			boton.addEventListener('click', async function(event){
+				const response = await fetch(`/api/products/${productId}`, {method: 'DELETE'})
+				const data = await response => response.json()
+				boton.parentElement.parentElement.remove()
+			)};
 		}
