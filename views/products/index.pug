@@ -43,7 +43,8 @@ block main
 					td
 						a.button.is-small.mr-1(href='/products/'+product.id) 👀
 						a.button.is-small.mr-1(href='/products/edit/'+product.id) ✍️
-						a.button.is-small(href='/products/remove/'+product.id, onclick='return confirm("¿Seguro que quieres borrar el producto?")') 🗑️
+						a.button.is-small.mr-1(href='/products/remove/'+product.id, onclick='return confirm("¿Seguro que quieres borrar el producto?")') 🗑️
+						a.borradoRapido.button.is-small(data-productid=product.id) 🧹
 
 	.products
 		each product in products
@@ -59,4 +60,17 @@ block main
 					a.card-footer-item(href='/products/edit/'+product.id) Editar
 					a.card-footer-item(href='/products/remove/'+product.id, onclick='return confirm("¿Seguro que quieres borrar el producto?")') Borrar
 
-					
+	script.
+		const botones = document.querySelectorAll('.borradoRapido');
+
+		for(let boton of botones) {
+			boton.addEventListener('click', function(event){
+				const productId = boton.dataset.productid;
+				fetch(`/api/products/${productId}`, {method: 'DELETE'})
+				.then(response => response.json())
+				.then(data => {
+					boton.parentElement.parentElement.remove();
+				})
+				.catch(error => console.log(error))
+			})
+		}

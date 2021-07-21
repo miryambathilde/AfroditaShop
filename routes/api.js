@@ -9,7 +9,7 @@ const { checkToken, checkAdmin, checkRole } = require('./middlewares');
 
 // delegamos las queries al router de api/products.js //
 // incluimos los middleware //
-router.use('/products', checkToken, checkRole('R'), apiProductsRouter);
+router.use('/products', /* checkToken, checkRole('R'), */ apiProductsRouter);
 router.use('/clients', checkToken, checkAdmin, apiClientsRouter);
 router.use('/users', apiUsersRouter);
 
