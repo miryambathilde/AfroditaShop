@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 // DOT ENV LIBRERIA //
 require('dotenv').config();
@@ -28,13 +30,22 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//flash and session //
+app.use(cookieParser('secret'));
+app.use(
+	session({
+		secret: 'SECRET',
+		resave: true,
+		saveUninitialized: true,
+	})
+);
+app.use(flash());
 
 // QUERIES API //
+// delegación a la API //
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// delegación a la API //
 app.use('/api', apiRouter);
 app.use('/products', productsRouter);
 
