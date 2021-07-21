@@ -3,6 +3,16 @@ extends ../layouts/layout_products.pug
 
 block main
 	h3.title.is-3 Listado de productos (#{products.length})
+	h4.title.is-4 Pagina #{page}
+	.page-buttons.mb-4
+		if page !== 1
+			a.button.mr-3(href="?page="+(page-1)) Anterior
+		else
+			a.button.mr-3(disabled) Anterior
+		if products.length < 5
+			a.button(disabled) Siguiente
+		else
+			a.button(href="?page="+(page+1)) Siguiente
 
 
 	//- ahora lo que queremos es que se nos muestren los datos del array products en una tabla //

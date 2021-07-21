@@ -14,9 +14,13 @@ router.get('/', (req, res) => {
 	// 2. Pasar los productos recuperados de la vista
 	// 3. Dentro de la vista iterarlos para mostrarlos
 
-	getAll(1, 20)
+	//http://localhost:3000/products/?page=1
+	// PAGINADO DE PRODUCTOS //
+	const page = req.query.page || 1;
+
+	getAll(page, 5)
 		.then((products) => {
-			res.render('products/index', { products });
+			res.render('products/index', { products, page: parseInt(page) });
 		})
 		.catch((error) => console.log(error));
 });
@@ -41,18 +45,6 @@ router.get('/edit/:productId', (req, res) => {
 		.catch((error) => console.log(error));
 });
 
-// POST localhost:3000/products/update
-// que vamos a hacer aqui? ejecutar metodo update del modelo
-// Que datos tengo disponibles? req.body(name, description, price, category, productId)
-// Que datos necesito? {name, description, price, category} + id
-router.post('/update', (req, res) => {
-	update(req.body.productId, req.body)
-		.then((result) => res.redirect('/products'))
-		.catch((error) => console.log(error));
-
-	//res.send('Formulario edit funciona');
-});
-
 /* GET localhost:3000/products/remove/productId
 1. A partir del ID del producto borramos dicho producto de la BD
 2. Redirect a /products
@@ -64,12 +56,6 @@ router.get('/remove/:productId', (req, res) => {
 		.then((result) => res.redirect('/products'))
 		.catch((error) => console.log(error));
 	//res.send('Formulario remove funciona');
-});
-
-router.post('/create', (req, res) => {
-	create(req.body)
-		.then((result) => res.redirect('/products'))
-		.catch((error) => console.log(error));
 });
 
 /* 
@@ -88,5 +74,23 @@ router.get('/:productId', (req, res) => {
 		.catch((error) => console.log(error));
 });
 //res.send('Formulario detalle producto funciona');
+
+// POST localhost:3000/products/update
+// que vamos a hacer aqui? ejecutar metodo update del modelo
+// Que datos tengo disponibles? req.body(name, description, price, category, productId)
+// Que datos necesito? {name, description, price, category} + id
+router.post('/update', (req, res) => {
+	update(req.body.productId, req.body)
+		.then((result) => res.redirect('/products'))
+		.catch((error) => console.log(error));
+
+	//res.send('Formulario edit funciona');
+});
+
+router.post('/create', (req, res) => {
+	create(req.body)
+		.then((result) => res.redirect('/products'))
+		.catch((error) => console.log(error));
+});
 
 module.exports = router;
