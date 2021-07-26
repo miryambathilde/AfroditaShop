@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 		title: 'Aprendiendo node con Mario',
 		clasesV2: ['primera', 'segunda', 'tercera'],
 		products: 1,
-		animals: ['perro', 'gato', 'hamster', 'conejo'],
+		animals: ['perro', 'gato', 'hamster', 'conejo', 'loro'],
 	});
 });
 
